@@ -71,7 +71,7 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
             id="title"
             name="title"
             type="text"
-            className="mt-2 w-full p-2 border rounded"
+            className="mt-2 w-full p-2 border rounded-md"
             value={updatedTitle}
             onChange={(e) => setUpdatedTitle(e.target.value)}
           />
@@ -85,7 +85,7 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
             id="priority"
             name="priority"
             type="number"
-            className="mt-2 w-full p-2 border rounded"
+            className="mt-2 w-full p-2 border rounded-md"
             value={updatedPriority}
             onChange={(e) => setUpdatedPriority(e.target.value)}
           />
@@ -103,7 +103,7 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
         </div>
 
         <div>
-          <div className="flex justify-between gap-2">
+          <div className="flex flex-col md:flex-row justify-between gap-2">
             <label htmlFor="startTime" className="block font-semibold">
               Start Time:
             </label>
@@ -111,12 +111,12 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
               End Time:
             </label>
           </div>
-          <div className="flex justify-between gap-2">
+          <div className="flex flex-col md:flex-row justify-between gap-2">
             <Input
               id="startTime"
               name="startTime"
               type="datetime-local"
-              className="mt-2 w-full p-2 border rounded"
+              className="mt-2 w-full p-2 border rounded-md"
               value={updatedStartTime}
               onChange={(e) => setUpdatedStartTime(e.target.value)}
             />
@@ -124,7 +124,7 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
               id="endTime"
               name="endTime"
               type="datetime-local"
-              className="mt-2 w-full p-2 border rounded"
+              className="mt-2 w-full p-2 border rounded-md"
               value={updatedEndTime}
               onChange={(e) => setUpdatedEndTime(e.target.value)}
             />
@@ -134,7 +134,7 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
         <div className="mt-4 text-right">
           <button
             onClick={updateEdit}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
           >
             Update
           </button>

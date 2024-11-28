@@ -24,12 +24,7 @@ const TaskTable = ({ sortedTasks, selectedRows, handleSelectRecords }) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">
-              <input
-                type="checkbox"
-                className="w-4 h-4 text-[#569EFC] border-gray-300 rounded focus:ring-[#569EFC]"
-              />
-            </TableHead>
+            <TableHead className="w-[100px]"></TableHead>
             <TableHead>Task Id</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Priority</TableHead>

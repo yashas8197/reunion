@@ -117,12 +117,12 @@ const AddTask = ({ isDialogOpen, setIsDialogOpen }) => {
                 checked={formData.status}
                 onCheckedChange={handleSwitchChange}
               />
-              <p>finished</p>
+              <p>Finished</p>
             </div>
           </div>
 
           <div>
-            <div className="flex justify-between gap-2">
+            <div className="flex flex-col md:flex-row justify-between gap-2">
               <label htmlFor="startTime" className="block font-semibold">
                 Start Time:
               </label>
@@ -130,7 +130,7 @@ const AddTask = ({ isDialogOpen, setIsDialogOpen }) => {
                 End Time:
               </label>
             </div>
-            <div className="flex justify-between gap-2">
+            <div className="flex flex-col md:flex-row justify-between gap-2">
               <Input
                 id="startTime"
                 name="startTime"
@@ -154,7 +154,7 @@ const AddTask = ({ isDialogOpen, setIsDialogOpen }) => {
           <div className="mt-4 text-right">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
             >
               Add Task
             </button>
