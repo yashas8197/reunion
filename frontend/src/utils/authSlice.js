@@ -8,7 +8,7 @@ export const signUpAsync = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axios.post(
-        "https://reunion-sigma.vercel.app/auth/signup",
+        "https://reunion-alpha.vercel.app/auth/signup",
         userData
       );
       console.log(response);
@@ -24,7 +24,7 @@ export const loginAsync = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await axios.post(
-        "https://reunion-sigma.vercel.app/auth/login",
+        "https://reunion-alpha.vercel.app/auth/login",
         userData
       );
       console.log(response);
@@ -42,7 +42,7 @@ export const logoutAsync = createAsyncThunk(
 
     try {
       const response = await axios.post(
-        "https://reunion-sigma.vercel.app/auth/logout",
+        "https://reunion-alpha.vercel.app/auth/logout",
         user,
         {
           headers: {

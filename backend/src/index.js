@@ -12,11 +12,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS configuration
-const corsOptions = {
-  origin: "*", // Allow your frontend URL
-  credentials: true, // Allow cookies (credentials) to be sent
-  methods: ["GET", "POST", "PUT", "DELETE"], // Define allowed methods
-};
+app.use(
+  cors({
+    origin: "http://localhost:5173/", // Allow frontend domain
+    methods: ["GET", "POST", "OPTIONS"], // Allow specific methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow necessary headers
+  })
+);
 
 // Apply CORS middleware
 app.use(cors(corsOptions));
