@@ -3,13 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Thunks for asynchronous actions (e.g., fetching tasks)
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const response = await fetch("https://reunion-sigma.vercel.app/tasks");
+  const response = await fetch("https://reunion-wine.vercel.app/tasks");
   const data = await response.json();
   return data;
 });
 
 export const addTask = createAsyncThunk("tasks/addTask", async (task) => {
-  const response = await fetch("https://reunion-sigma.vercel.app/tasks", {
+  const response = await fetch("https://reunion-wine.vercel.app/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(task),
@@ -23,7 +23,7 @@ export const updateTask = createAsyncThunk(
   "tasks/updateTask",
   async ({ id, updatedTask }) => {
     const response = await fetch(
-      `https://reunion-sigma.vercel.app/tasks/${id}`,
+      `https://reunion-wine.vercel.app/tasks/${id}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -36,7 +36,7 @@ export const updateTask = createAsyncThunk(
 );
 
 export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
-  const response = await fetch(`https://reunion-sigma.vercel.app/tasks/${id}`, {
+  const response = await fetch(`https://reunion-wine.vercel.app/tasks/${id}`, {
     method: "DELETE",
   });
   if (response.ok) {
@@ -49,7 +49,7 @@ export const fetchStatistics = createAsyncThunk(
   "tasks/fetchStatistics",
   async () => {
     const response = await fetch(
-      "https://reunion-sigma.vercel.app/tasks/statistics"
+      "https://reunion-wine.vercel.app/tasks/statistics"
     );
     const data = await response.json();
     return data;
