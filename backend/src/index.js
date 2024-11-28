@@ -11,17 +11,25 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS configuration
+const allowedOrigins = [
+  "http://localhost:5173", // Development (local)
+  "https://reunion-6dyg.vercel.app/", // Production (Vercel)
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173/", // Allow frontend domain
-    methods: ["GET", "POST", "OPTIONS"], // Allow specific methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow necessary headers
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Apply CORS middleware
-app.use(cors(corsOptions));
 initializeDatabase();
 
 app.use("/auth", authRouter);
