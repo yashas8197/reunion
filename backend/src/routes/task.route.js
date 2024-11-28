@@ -6,11 +6,12 @@ import {
   deleteTask,
   statisticsData,
 } from "../contollers/task.controller.js";
+import veriftJWT from "../middleware/auth.middleware.js";
 
 const taskRouter = express.Router();
 
 // Route to get all tasks
-taskRouter.get("/", getAllTasks);
+taskRouter.get("/", veriftJWT, getAllTasks);
 
 // Route to add a new task
 taskRouter.post("/", addTask);
