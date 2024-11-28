@@ -22,6 +22,6 @@ taskRouter.post("/:id", updateTask);
 // Route to delete a task
 taskRouter.delete("/:id", deleteTask);
 
-taskRouter.get("/statistics", statisticsData);
+taskRouter.get("/statistics", veriftJWT, statisticsData);
 
 export default taskRouter;
