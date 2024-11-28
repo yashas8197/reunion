@@ -3,13 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Thunks for asynchronous actions (e.g., fetching tasks)
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const response = await fetch("http://localhost:3000/tasks");
+  const response = await fetch("https://reunion-sigma.vercel.app/tasks");
   const data = await response.json();
   return data;
 });
 
 export const addTask = createAsyncThunk("tasks/addTask", async (task) => {
-  const response = await fetch("http://localhost:3000/tasks", {
+  const response = await fetch("https://reunion-sigma.vercel.app/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(task),
@@ -22,18 +22,21 @@ export const addTask = createAsyncThunk("tasks/addTask", async (task) => {
 export const updateTask = createAsyncThunk(
   "tasks/updateTask",
   async ({ id, updatedTask }) => {
-    const response = await fetch(`http://localhost:3000/tasks/${id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedTask),
-    });
+    const response = await fetch(
+      `https://reunion-sigma.vercel.app/tasks/${id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTask),
+      }
+    );
     const data = await response.json();
     return data;
   }
 );
 
 export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
-  const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+  const response = await fetch(`https://reunion-sigma.vercel.app/tasks/${id}`, {
     method: "DELETE",
   });
   if (response.ok) {
@@ -45,7 +48,9 @@ export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
 export const fetchStatistics = createAsyncThunk(
   "tasks/fetchStatistics",
   async () => {
-    const response = await fetch("http://localhost:3000/tasks/statistics");
+    const response = await fetch(
+      "https://reunion-sigma.vercel.app/tasks/statistics"
+    );
     const data = await response.json();
     return data;
   }
