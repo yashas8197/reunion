@@ -18,12 +18,16 @@ const Tasks = () => {
   const [filterPriority, setFilterPriority] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const dispatch = useDispatch();
-  const tasks = useSelector((store) => store.tasks?.tasks);
+  const { tasks, status } = useSelector((store) => store.tasks);
 
   useEffect(() => {
     dispatch(fetchTasks());
   }, []);
   if (!tasks) return;
+
+  if (status === "loading") {
+    return <p className="flex justify-center items-center mt-40">Loading...</p>;
+  }
 
   const handleSelectRecords = (e) => {
     const { value, checked } = e.target;
@@ -72,7 +76,7 @@ const Tasks = () => {
     <div className="p-10">
       <h1 className="text-3xl font-bold">Task List</h1>
 
-      <div className="flex flex-wrap justify-between items-center space-y-4 sm:space-y-0 sm:flex-nowrap">
+      <div className="flex flex-wrap justify-between items-center space-y-4 mt-10 sm:space-y-0 sm:flex-nowrap">
         <div className="flex items-center space-x-3">
           <AddTask
             isDialogOpen={isDialogOpen}

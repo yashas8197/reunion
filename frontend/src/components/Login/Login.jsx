@@ -66,7 +66,7 @@ const Login = () => {
                 type="submit"
                 className="text-white bg-[#569EFC] w-full py-3 rounded-sm font-semibold"
               >
-                Login In
+                {status === "loading" ? "Loading..." : "Login In"}
               </button>
             </div>
             {error && <p className="text-xs text-red-600">{error}</p>}

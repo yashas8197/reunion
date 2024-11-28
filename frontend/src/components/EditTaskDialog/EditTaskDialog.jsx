@@ -5,7 +5,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "../ui/input";
@@ -64,7 +63,6 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
           <DialogDescription>Task ID: {editTask?._id}</DialogDescription>
         </DialogHeader>
 
-        {/* Title input */}
         <div>
           <label htmlFor="title" className="block font-semibold">
             Title:
@@ -79,7 +77,6 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
           />
         </div>
 
-        {/* Priority input */}
         <div>
           <label htmlFor="priority" className="block font-semibold">
             Priority:
@@ -94,7 +91,6 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
           />
         </div>
 
-        {/* Status switch */}
         <div>
           <label htmlFor="status" className="block font-semibold">
             Status:
@@ -106,7 +102,6 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
           </div>
         </div>
 
-        {/* Start time and end time inputs */}
         <div>
           <div className="flex justify-between gap-2">
             <label htmlFor="startTime" className="block font-semibold">
@@ -136,7 +131,6 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
           </div>
         </div>
 
-        {/* Update button */}
         <div className="mt-4 text-right">
           <button
             onClick={updateEdit}

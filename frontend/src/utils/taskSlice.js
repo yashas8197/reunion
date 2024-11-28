@@ -90,7 +90,7 @@ const taskSlice = createSlice({
   name: "tasks",
   initialState: {
     tasks: [],
-    loading: "idle",
+    status: "idle",
     error: null,
     editTask: null,
     statistics: null,
@@ -103,24 +103,27 @@ const taskSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, (state) => {
-        state.loading = true;
+        state.status = "loading";
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
-        state.loading = false;
+        state.status = "succeeded";
         state.tasks = action.payload.tasks;
       })
       .addCase(fetchTasks.rejected, (state, action) => {
-        state.loading = false;
+        state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(fetchStatistics.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(fetchStatistics.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.statistics = action.payload;
       })
       .addCase(addTask.fulfilled, (state, action) => {
         state.tasks.push(action.payload.task);
       })
       .addCase(updateTask.fulfilled, (state, action) => {
-        console.log(action.payload);
         const index = state.tasks.findIndex(
           (task) => task._id === action.payload.task._id
         );
