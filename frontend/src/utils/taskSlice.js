@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
 
   try {
     const response = await axios.get("https://reunion-wine.vercel.app/tasks", {
@@ -67,7 +67,7 @@ export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
 export const fetchStatistics = createAsyncThunk(
   "tasks/fetchStatistics",
   async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authToken");
 
     try {
       const response = await axios.get(
