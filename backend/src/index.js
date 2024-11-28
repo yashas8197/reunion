@@ -11,24 +11,17 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = [
-  "http://localhost:5173", // Development (local)
-  "https://reunion-6dyg.vercel.app/", // Production (Vercel)
-];
+// Set up CORS options to allow all origins
+const corsOptions = {
+  origin: true, // Allows all origins
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  methods: ["GET", "POST", "OPTIONS"], // Allow these methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
+};
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// Use CORS middleware
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 initializeDatabase();
 
