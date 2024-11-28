@@ -53,6 +53,7 @@ const EditTaskDialog = ({ isDialogOpenEdit, setIsDialogOpenEdit }) => {
       status: isFinished ? "finished" : "pending",
     };
     dispatch(updateTask({ id: editTask._id, updatedTask }));
+    setIsDialogOpenEdit(false);
   };
 
   return (

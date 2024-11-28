@@ -64,7 +64,7 @@ const AddTask = ({ isDialogOpen, setIsDialogOpen }) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button className="text-[#0055CC]" variant="outline">
+        <Button className="text-[#569EFC]" variant="outline">
           + Add Task
         </Button>
       </DialogTrigger>

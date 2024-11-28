@@ -28,9 +28,9 @@ const Login = () => {
     }
   };
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <section className="bg-white shadow-2xl w-1/4 p-8">
-        <div className="flex justify-center items-center space-x-4">
+    <div className="min-h-screen flex justify-center items-center px-4">
+      <section className="bg-white shadow-2xl w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 p-8">
+        <div className="flex justify-center items-center space-x-4 mb-6">
           <img
             src="https://res.cloudinary.com/dlrlwy7hg/image/upload/v1732456754/mini_magick20241124-29114-zzfibi_rhz2je.png"
             alt="logo"
@@ -49,7 +49,7 @@ const Login = () => {
                 name="email"
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="border-2 border-gray-400 focus:border-[#0055CC] focus:outline-none p-2 rounded w-full"
+                className="border-2 border-gray-400 focus:border-[#569EFC] focus:outline-none p-2 rounded w-full"
               />
             </div>
             <div>
@@ -58,13 +58,13 @@ const Login = () => {
                 name="password"
                 onChange={handleChange}
                 placeholder="Enter your password"
-                className="border-2 border-gray-400 focus:border-[#0055CC] focus:outline-none p-2 rounded w-full"
+                className="border-2 border-gray-400 focus:border-[#569EFC] focus:outline-none p-2 rounded w-full"
               />
             </div>
             <div>
               <button
                 type="submit"
-                className="text-white bg-[#0055CC] w-full py-3 rounded-sm font-semibold"
+                className="text-white bg-[#569EFC] w-full py-3 rounded-sm font-semibold"
               >
                 Login In
               </button>
@@ -72,7 +72,7 @@ const Login = () => {
             {error && <p className="text-xs text-red-600">{error}</p>}
           </form>
           <p className="text-center mt-4">
-            <Link to="/" className="text-[#0055CC] hover:underline font-medium">
+            <Link to="/" className="text-[#569EFC] hover:underline font-medium">
               Create an account? Signup
             </Link>
           </p>

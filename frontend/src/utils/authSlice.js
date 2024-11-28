@@ -11,7 +11,6 @@ export const signUpAsync = createAsyncThunk(
         "https://reunion-wine.vercel.app/auth/signup",
         userData
       );
-      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -27,7 +26,6 @@ export const loginAsync = createAsyncThunk(
         "https://reunion-wine.vercel.app/auth/login",
         userData
       );
-      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -50,7 +48,6 @@ export const logoutAsync = createAsyncThunk(
           },
         }
       );
-      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);

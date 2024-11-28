@@ -1,11 +1,21 @@
 // utils/taskSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Thunks for asynchronous actions (e.g., fetching tasks)
+import axios from "axios";
+
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const response = await fetch("https://reunion-wine.vercel.app/tasks");
-  const data = await response.json();
-  return data;
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get("https://reunion-wine.vercel.app/tasks", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data : error.message);
+  }
 });
 
 export const addTask = createAsyncThunk("tasks/addTask", async (task) => {
@@ -88,7 +98,6 @@ const taskSlice = createSlice({
         state.statistics = action.payload;
       })
       .addCase(addTask.fulfilled, (state, action) => {
-        console.log(state.tasks);
         state.tasks.push(action.payload.task);
       })
       .addCase(updateTask.fulfilled, (state, action) => {

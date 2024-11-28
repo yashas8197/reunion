@@ -18,7 +18,7 @@ const Header = () => {
     }
   }, [status]);
 
-  const isAuthenticated = localStorage.getItem("isAuthenticated") || "";
+  const isAuthenticated = localStorage.getItem("user") || "";
 
   const handleSignout = () => {
     dispatch(logoutAsync());
@@ -33,7 +33,7 @@ const Header = () => {
             className="h-8 w-auto sm:h-10"
           />
           <h1 className="text-2xl font-bold text-gray-800">
-            <Link to={isAuthenticated ? "/dashboard" : ""}>Donezo</Link>
+            <Link to={isAuthenticated ? "/dashboard" : "/"}>Donezo</Link>
           </h1>
         </div>
 
@@ -52,7 +52,7 @@ const Header = () => {
           </NavLink>
           {(pathname === "/dashboard" || pathname === "/tasks") && (
             <Button
-              className="mt-4 sm:mt-0 bg-[#0055CC]"
+              className="mt-4 sm:mt-0 bg-[#569EFC] hover:bg-[#569EFC]"
               onClick={handleSignout}
             >
               Sign Out

@@ -1,31 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import EditTaskDialog from "../EditTaskDialog/EditTaskDialog";
 import AddTask from "../AddTask/AddTask";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTask, fetchTasks, setEditTask } from "@/utils/taskSlice";
-import { formatDate, getTotalTimeToFinish } from "@/utils/helpers.js";
+import { deleteTask, fetchTasks } from "@/utils/taskSlice";
+import TaskTable from "../TaskTable/TaskTable";
 
 const Tasks = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isDialogOpenEdit, setIsDialogOpenEdit] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [sortOrder, setSortOrder] = useState("");
   const [filterPriority, setFilterPriority] = useState("");
@@ -42,9 +29,9 @@ const Tasks = () => {
     const { value, checked } = e.target;
 
     if (checked) {
-      setSelectedRows((prev) => [...prev, value]); // Add to state
+      setSelectedRows((prev) => [...prev, value]);
     } else {
-      setSelectedRows((prev) => prev.filter((row) => row !== value)); // Remove from state
+      setSelectedRows((prev) => prev.filter((row) => row !== value));
     }
   };
 
@@ -52,11 +39,6 @@ const Tasks = () => {
     if (selectedRows.length > 0) {
       selectedRows.forEach((row) => dispatch(deleteTask(row)));
     }
-  };
-
-  const handleEditClick = (task) => {
-    dispatch(setEditTask(task));
-    setIsDialogOpenEdit(true);
   };
 
   const sortedTasks = [...tasks]
@@ -80,6 +62,12 @@ const Tasks = () => {
       return sortByDate;
     });
 
+  const handleClearFilters = () => {
+    setSortOrder("");
+    setFilterPriority("");
+    setFilterStatus("");
+  };
+
   return (
     <div className="p-10">
       <h1 className="text-3xl font-bold">Task List</h1>
@@ -101,7 +89,7 @@ const Tasks = () => {
 
         <div className="space-x-3 flex items-center">
           <DropdownMenu>
-            <DropdownMenuTrigger className="bg-blue-500 text-white p-3 rounded-2xl">
+            <DropdownMenuTrigger className="bg-[#569EFC] text-white p-3 rounded-2xl">
               {sortOrder === "" ? "Sort" : sortOrder}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -115,7 +103,7 @@ const Tasks = () => {
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="bg-blue-500 text-white p-3 rounded-2xl">
+            <DropdownMenuTrigger className="bg-[#569EFC] text-white p-3 rounded-2xl">
               {filterPriority === "" ? "Priority" : filterPriority}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -132,7 +120,7 @@ const Tasks = () => {
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="bg-blue-500 text-white p-3 rounded-2xl">
+            <DropdownMenuTrigger className="bg-[#569EFC] text-white p-3 rounded-2xl">
               {filterStatus === "" ? "Status" : filterStatus}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -144,65 +132,21 @@ const Tasks = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          <span
+            onClick={handleClearFilters}
+            className="text-[#569EFC] cursor-pointer"
+          >
+            Clear Filter
+          </span>
         </div>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">
-              <input
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-            </TableHead>
-            <TableHead>Task Id</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Priority</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Start time</TableHead>
-            <TableHead>End time</TableHead>
-            <TableHead>Total time to finish (hrs)</TableHead>
-            <TableHead>Edit</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {sortedTasks.map((task, i) => (
-            <TableRow key={task._id}>
-              <TableCell>
-                <input
-                  type="checkbox"
-                  value={task._id}
-                  checked={selectedRows.includes(task._id)}
-                  onChange={handleSelectRecords}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </TableCell>
-              <TableCell>{i + 1}</TableCell>
-              <TableCell>{task.title}</TableCell>
-              <TableCell>{task.priority}</TableCell>
-              <TableCell>{task.status}</TableCell>
-              <TableCell>{formatDate(task.startTime)}</TableCell>
-              <TableCell>{formatDate(task.endTime)}</TableCell>
-              <TableCell>
-                {getTotalTimeToFinish(task.startTime, task.endTime)}
-              </TableCell>
-              <TableCell>
-                <EditTaskDialog
-                  isDialogOpenEdit={isDialogOpenEdit}
-                  setIsDialogOpenEdit={setIsDialogOpenEdit}
-                />
-                <button
-                  onClick={() => handleEditClick(task)}
-                  className="text-blue-500 hover:underline"
-                >
-                  🖋️
-                </button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <TaskTable
+        sortedTasks={sortedTasks}
+        selectedRows={selectedRows}
+        handleSelectRecords={handleSelectRecords}
+      />
     </div>
   );
 };
