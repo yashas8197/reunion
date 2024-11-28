@@ -19,50 +19,69 @@ export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
 });
 
 export const addTask = createAsyncThunk("tasks/addTask", async (task) => {
-  const response = await fetch("https://reunion-wine.vercel.app/tasks", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(task),
-  });
-  const data = await response.json();
-  console.log(data.task);
-  return data;
+  try {
+    const response = await axios.post(
+      "https://reunion-wine.vercel.app/tasks",
+      task,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data : error.message);
+  }
 });
 
 export const updateTask = createAsyncThunk(
   "tasks/updateTask",
   async ({ id, updatedTask }) => {
-    const response = await fetch(
-      `https://reunion-wine.vercel.app/tasks/${id}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedTask),
-      }
-    );
-    const data = await response.json();
-    return data;
+    try {
+      const response = await axios.post(
+        `https://reunion-wine.vercel.app/tasks/${id}`,
+        updatedTask,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response ? error.response.data : error.message);
+    }
   }
 );
 
 export const deleteTask = createAsyncThunk("tasks/deleteTask", async (id) => {
-  const response = await fetch(`https://reunion-wine.vercel.app/tasks/${id}`, {
-    method: "DELETE",
-  });
-  if (response.ok) {
+  try {
+    await axios.delete(`https://reunion-wine.vercel.app/tasks/${id}`);
     return id;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data : error.message); // Handle error
   }
-  throw new Error("Failed to delete task");
 });
 
 export const fetchStatistics = createAsyncThunk(
   "tasks/fetchStatistics",
   async () => {
-    const response = await fetch(
-      "https://reunion-wine.vercel.app/tasks/statistics"
-    );
-    const data = await response.json();
-    return data;
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(
+        "https://reunion-wine.vercel.app/tasks/statistics",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response ? error.response.data : error.message);
+    }
   }
 );
 
